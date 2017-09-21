@@ -7,6 +7,7 @@ libthipe_la_LDFLAGS = -lrestart -ltscpaq -lcpaq
 libthrio_la_SOURCES = thrio.c
 #include_HEADERS = thrio.h
 libthrio_la_LDFLAGS = -lrestart -ltscpaq -lcpaq -lpthread
-libthrio_la_LDADD = libthipe.la
+#libthrio_la_LDADD = libthipe.la
+libthrio_la_LIBADD = libthipe.la
 
 #AM_CPPFLAGS = -D__STDC_INT64__
