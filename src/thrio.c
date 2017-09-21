@@ -79,24 +79,36 @@ int thrio (
    io_thread_cb_arg.in  = in;
    io_thread_cb_arg.out = out;
    error_check (pthread_create (&io_thread, NULL, io_thread_cb, &dest) != 0) {
-      free_io (&dest);
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wunused-result"
+      (void) free_io (&dest);
+	#pragma GCC diagnostic pop
       return -2;
    }
    worker_thread_cb_arg.io = &dest;
    worker_thread_cb_arg.cb = cb;
    error_check (pthread_create (&worker_thread, NULL, worker_thread_cb, /*&src*/ /*&dest*/ &worker_thread_cb_arg) != 0) {
       TODO (kill io thread)
-      free_io (&dest);
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wunused-result"
+      (void) free_io (&dest);
+	#pragma GCC diagnostic pop
       return -3;
    }
 
    error_check (pthread_join (io_thread, NULL) != 0) {
       TODO (kill worker thread)
-      free_io (&dest);
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wunused-result"
+      (void) free_io (&dest);
+	#pragma GCC diagnostic pop
       return -4;
    }
    error_check (pthread_join (worker_thread, NULL) != 0) {
-      free_io (&dest);
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wunused-result"
+      (void) free_io (&dest);
+	#pragma GCC diagnostic pop
       return -5;
    }
 
