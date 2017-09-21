@@ -78,7 +78,7 @@ int thrio (
    io_thread_cb_arg.io = &dest;
    io_thread_cb_arg.in  = in;
    io_thread_cb_arg.out = out;
-   error_check (pthread_create (&io_thread, NULL, io_thread_cb, &dest) != 0) {
+   error_check (pthread_create (&io_thread, NULL, io_thread_cb, &io_thread_cb_arg) != 0) {
 	#pragma GCC diagnostic push
 	#pragma GCC diagnostic ignored "-Wunused-result"
       (void) free_io (&dest);
