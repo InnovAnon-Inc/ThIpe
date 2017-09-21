@@ -15,10 +15,11 @@ int (*thrio_cb_t) (
    void const *restrict src, size_t srcsz, size_t *restrict destsz) ;
 
 int thrio (
+   fd_t in, fd_t out,
    size_t in_bufsz, size_t in_nbuf,
    size_t out_bufsz, size_t out_nbuf,
    thrio_cb_t cb)
-__attribute__ ((nonnull (5), nothrow, warn_unused_result)) ;
+__attribute__ ((nonnull (7), nothrow, warn_unused_result)) ;
 
 #ifdef __cplusplus
 }
