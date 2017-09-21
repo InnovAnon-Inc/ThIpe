@@ -43,7 +43,7 @@ static int worker_thread_cb_cb (
    thrio_cb_t *restrict arg = (thrio_cb_t *restrict) _arg;
 
    TODO (init buf_out->n to out_bufsz below)
-   error_check (arg (buf_out->buf, buf_in->buf,
+   error_check (*arg (buf_out->buf, buf_in->buf,
       buf_in->n, &(buf_out->n)) != 0)
       return -1;
    return 0;
@@ -54,7 +54,7 @@ static void *worker_thread_cb (void *restrict _arg) {
    /*io_t *restrict arg = (io_t *restrict) _arg;*/
    worker_thread_cb_t *restrict arg =
       (worker_thread_cb_t *restrict) _arg;
-   error_check (worker_io (arg->io, worker_thread_cb_cb, arg->cb) != 0)
+   error_check (worker_io (arg->io, worker_thread_cb_cb, &(arg->cb)) != 0)
       return NULL;
    return NULL;
 }
