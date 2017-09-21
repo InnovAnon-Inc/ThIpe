@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 
-#include <pipe.h>
+#include <io.h>
 
 __attribute__ ((leaf, nonnull (1, 2, 3/*, 4*/), nothrow))
 void init_io (
