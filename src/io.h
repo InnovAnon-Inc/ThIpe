@@ -42,8 +42,8 @@ __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
 
 typedef __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
 int (*worker_io_cb) (
-   buffer_t const *restrict buf_in,
    buffer_t *restrict buf_out,
+   buffer_t const *restrict buf_in,
    void *restrict arg) ;
 
 int worker_io (
