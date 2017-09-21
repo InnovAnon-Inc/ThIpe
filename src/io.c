@@ -106,6 +106,7 @@ int worker_io (
          return -3;
       }
 
+      buf_out->n = out->bufsz;
       error_check (cb (buf_out, buf_in, cbarg) != 0) {
          TODO (kill other thread)
          return -4;
