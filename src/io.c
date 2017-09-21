@@ -66,3 +66,62 @@ int free_io (io_t *restrict dest/*, io_t *restrict src*/) {
    free (dest->out);
    return 0;
 }
+
+__attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
+int rw_io (io_t *restrict arg, fd_t rd, fd_t wr) {
+   while (true) {
+      error_check (read_pipe  (arg->in,  rd) != 0) return -1;
+      error_check (write_pipe (arg->out, wr) != 0) return -2;
+   }
+   /*return 0;*/
+   __builtin_unreachable ();
+}
+
+__attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
+int worker_io (io_t *restrict arg) {
+   pipe_t *restrict in;
+   pipe_t *restrict out;
+   in  = arg->in;
+   out = arg->out;
+   /*in  = arg->out;
+   out = arg->in;*/
+   while (true) {
+      buffer_t const *restrict buf_in;
+      buffer_t *restrict buf_out;
+
+      error_check (tscpaq_dequeue (&(in->q_out), (void const *restrict *restrict) &buf_in)   != 0) {
+         TODO (kill other thread);
+         return -1;
+      }
+
+      error_check (tscpaq_dequeue (&(out->q_in), (void const *restrict *restrict) &buf_out)  != 0) {
+         TODO (kill other thread);
+         return -2;
+      }
+
+      if (buf_in->n == 0) {
+         TODO (kill other thread)
+         return -3;
+      }
+
+      error_check (cb (buf_out, buf_in) != 0) {
+         TODO (kill other thread)
+         return -4;
+      }
+      /*buf_out->n = min (buf_in->n, out->bufsz);
+      memcpy (buf_out->buf, buf_in->buf, buf_out->n);*/
+      /*memcpy (buf_out->buf, buf_in->buf, buf_in->n);*/
+
+      error_check (tscpaq_enqueue (&(out->q_out), buf_out) != 0) {
+         TODO (kill other thread);
+         return -5;
+      }
+
+      error_check (tscpaq_enqueue (&(in->q_in),   buf_in)  != 0) {
+         TODO (kill other thread);
+         return -6;
+      }
+   }
+   /*return 0;*/
+   __builtin_unreachable ();
+}

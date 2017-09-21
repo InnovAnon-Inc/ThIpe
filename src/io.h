@@ -37,6 +37,12 @@ __attribute__ ((nonnull (1/*, 2*/), nothrow, warn_unused_result)) ;
 int free_io (io_t *restrict dest/*, io_t *restrict src*/)
 __attribute__ ((leaf, nonnull (1/*, 2*/), nothrow, warn_unused_result)) ;
 
+int rw_io (io_t *restrict arg, fd_t rd, fd_t wr)
+__attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
+
+int worker_io (io_t *restrict arg)
+__attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
+
 #ifdef __cplusplus
 }
 #endif
