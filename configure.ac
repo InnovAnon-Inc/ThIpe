@@ -10,8 +10,8 @@ AC_CONFIG_FILES([
 ])
 AC_CONFIG_MACRO_DIR([m4])
 
-AC_CHECK_HEADERS([stdlib.h,strings.h])
-AC_CHECK_HEADERS([glitter.h,restart.h,tscpaq.h])
+AC_CHECK_HEADERS([stdlib.h strings.h])
+AC_CHECK_HEADERS([glitter.h restart.h tscpaq.h])
 
 AC_CHECK_LIB([stdlib],[malloc,free])
 AC_CHECK_LIB([restart],[r_read,r_write])
