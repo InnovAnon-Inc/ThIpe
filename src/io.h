@@ -40,8 +40,16 @@ __attribute__ ((leaf, nonnull (1/*, 2*/), nothrow, warn_unused_result)) ;
 int rw_io (io_t *restrict arg, fd_t rd, fd_t wr)
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
 
-int worker_io (io_t *restrict arg)
-__attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
+typedef __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
+int (*worker_io_cb) (
+   buffer_t const *restrict buf_in,
+   buffer_t *restrict buf_out,
+   void *restrict arg) ;
+
+int worker_io (
+   io_t *restrict arg,
+   worker_io_cb cb, void *restrict cbarg)
+__attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result)) ;
 
 #ifdef __cplusplus
 }
