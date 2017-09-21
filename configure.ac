@@ -12,11 +12,13 @@ AC_CONFIG_MACRO_DIR([m4])
 
 AC_CHECK_HEADERS([stdlib.h])
 AC_CHECK_HEADERS([glitter.h restart.h tscpaq.h])
+AC_CHECK_HEADERS([pthread.h])
 
 AC_CHECK_LIB([stdlib],[malloc,free])
 AC_CHECK_LIB([restart],[r_read,r_write])
 AC_CHECK_LIB([tscpaq],[tscpaq_alloc_queue,tscpaq_free_queue])
 AC_CHECK_LIB([tscpaq],[tscpaq_enqueue,tscpaq_dequeue])
+AC_CHECK_LIB([pthread],[pthread_create,pthread_join])
 
 INNOVANON_WARNINGS([])
 

@@ -80,7 +80,7 @@ int rw_io (io_t *restrict arg, fd_t rd, fd_t wr) {
 __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
 int worker_io (
    io_t *restrict arg,
-   worker_io_cb cb, void *restrict cbarg) {
+   worker_io_cb_t cb, void *restrict cbarg) {
    pipe_t *restrict in;
    pipe_t *restrict out;
    in  = arg->in;

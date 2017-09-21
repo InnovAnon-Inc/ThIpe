@@ -41,14 +41,14 @@ int rw_io (io_t *restrict arg, fd_t rd, fd_t wr)
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
 
 typedef __attribute__ ((nonnull (1, 2), /*nothrow,*/ warn_unused_result))
-int (*worker_io_cb) (
+int (*worker_io_cb_t) (
    buffer_t *restrict buf_out,
    buffer_t const *restrict buf_in,
    void *restrict arg) ;
 
 int worker_io (
    io_t *restrict arg,
-   worker_io_cb cb, void *restrict cbarg)
+   worker_io_cb_t cb, void *restrict cbarg)
 __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result)) ;
 
 #ifdef __cplusplus
