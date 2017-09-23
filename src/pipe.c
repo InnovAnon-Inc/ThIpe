@@ -56,6 +56,8 @@ int alloc_pipe (
 
    /*error_check (init_pipe (p, bufsz, nbuf, bufs) != 0) return -2;*/
 
+	TODO (move for-j-loop out of here)
+	#pragma GCC ivdep
    for (i = 0; i != nbuf; i++)
       error_check (alloc_buffer (bufs + i, bufsz) != 0) {
          size_t j;
@@ -79,6 +81,7 @@ int free_pipe (pipe_t *restrict p) {
    size_t i;
    error_check (tscpaq_free_queue (&(p->q_in)) != 0) return -1;
    error_check (tscpaq_free_queue (&(p->q_out)) != 0) return -2;
+	#pragma GCC ivdep
    for (i = 0; i != p->nbuf; i++)
       free_buffer (p->bufs + i);
    free (p->bufs);
