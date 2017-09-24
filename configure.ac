@@ -9,6 +9,7 @@ AC_CONFIG_FILES([
  src/Makefile
 ])
 AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_SUBDIRS([glitter restart TSCPAQ])
 
 AC_CHECK_HEADERS([stdlib.h])
 AC_CHECK_HEADERS([glitter.h restart.h tscpaq.h])
