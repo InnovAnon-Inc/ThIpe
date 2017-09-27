@@ -7,4 +7,4 @@ libthipe_la_LIBADD = -lrestart -ltscpaq -lcpaq
 #thrio_SOURCES = main.c
 #thrio_LDADD = libthipe.la libthrio.la -lrestart -ltscpaq -lcpaq -lpthread
 
-AM_CPPFLAGS = -D__STDC_INT64__
+AM_CPPFLAGS += -D__STDC_INT64__
