@@ -34,10 +34,10 @@ int alloc_io (
    size_t out_bufsz, size_t out_nbuf)
 __attribute__ ((nonnull (1/*, 2*/), nothrow, warn_unused_result)) ;
 
-int free_io (io_t *restrict dest/*, io_t *restrict src*/)
+int free_io (io_t const *restrict dest/*, io_t *restrict src*/)
 __attribute__ ((leaf, nonnull (1/*, 2*/), nothrow, warn_unused_result)) ;
 
-int rw_io (io_t *restrict arg, fd_t rd, fd_t wr)
+int rw_io (io_t const *restrict arg, fd_t rd, fd_t wr)
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
 
 typedef __attribute__ ((nonnull (1, 2), /*nothrow,*/ warn_unused_result))
@@ -47,7 +47,7 @@ int (*worker_io_cb_t) (
    void *restrict arg) ;
 
 int worker_io (
-   io_t *restrict arg,
+   io_t const *restrict arg,
    worker_io_cb_t cb, void *restrict cbarg)
 __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result)) ;
 

@@ -16,12 +16,13 @@ __attribute__ ((leaf, nonnull (1, 4), nothrow, warn_unused_result))
 int init_pipe (
    pipe_t *restrict p,
    size_t bufsz, size_t nbuf,
-   buffer_t *restrict bufs) {
+   buffer_t const bufs[]) {
    size_t i;
    p->bufsz = bufsz;
    p->nbuf  = nbuf;
    p->bufs  = bufs;
 
+   TODO (we probably don't need synchronization here)
    for (i = 0; i != nbuf; i++)
       error_check (tscpaq_enqueue (
       &(p->q_in),
@@ -36,7 +37,7 @@ int alloc_pipe (
    pipe_t *restrict p,
    size_t bufsz, size_t nbuf) {
    size_t i;
-   buffer_t *restrict bufs;
+   buffer_t const *restrict bufs;
 
    bufs = malloc (nbuf * sizeof (buffer_t));
    error_check (bufs == NULL) return -1;
@@ -77,7 +78,7 @@ int alloc_pipe (
 }
 
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
-int free_pipe (pipe_t *restrict p) {
+int free_pipe (pipe_t const *restrict p) {
    size_t i;
    error_check (tscpaq_free_queue (&(p->q_in)) != 0) return -1;
    error_check (tscpaq_free_queue (&(p->q_out)) != 0) return -2;
@@ -91,7 +92,7 @@ TODO (rw_pipe_common ())
 
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
 int read_pipe (pipe_t *restrict p, fd_t fd) {
-   buffer_t *restrict buf;
+   buffer_t const *restrict buf;
    ssize_t n;
 
    error_check (tscpaq_dequeue (
@@ -115,7 +116,7 @@ int read_pipe (pipe_t *restrict p, fd_t fd) {
 
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
 int write_pipe (pipe_t *restrict p, fd_t fd) {
-   buffer_t *restrict buf;
+   buffer_t const *restrict buf;
    ssize_t n;
 
    error_check (tscpaq_dequeue (

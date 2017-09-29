@@ -29,6 +29,6 @@ int alloc_buffer (
 }
 
 __attribute__ ((leaf, nonnull (1), nothrow))
-void free_buffer (buffer_t *restrict buffer) {
+void free_buffer (buffer_t const *restrict buffer) {
    free (buffer->buf);
 }

@@ -59,7 +59,7 @@ int alloc_io (
 }
 
 __attribute__ ((leaf, nonnull (1/*, 2*/), nothrow, warn_unused_result))
-int free_io (io_t *restrict dest/*, io_t *restrict src*/) {
+int free_io (io_t const *restrict dest/*, io_t *restrict src*/) {
    error_check (free_pipe (dest->in) != 0) return -1;
    error_check (free_pipe (dest->out) != 0) return -2;
    free (dest->in);
@@ -68,7 +68,7 @@ int free_io (io_t *restrict dest/*, io_t *restrict src*/) {
 }
 
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
-int rw_io (io_t *restrict arg, fd_t rd, fd_t wr) {
+int rw_io (io_t const *restrict arg, fd_t rd, fd_t wr) {
    while (true) {
       error_check (read_pipe  (arg->in,  rd) != 0) return -1;
       error_check (write_pipe (arg->out, wr) != 0) return -2;
@@ -79,7 +79,7 @@ int rw_io (io_t *restrict arg, fd_t rd, fd_t wr) {
 
 __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
 int worker_io (
-   io_t *restrict arg,
+   io_t const *restrict arg,
    worker_io_cb_t cb, void *restrict cbarg) {
    pipe_t *restrict in;
    pipe_t *restrict out;

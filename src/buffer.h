@@ -27,7 +27,7 @@ int alloc_buffer (
    size_t bufsz)
 __attribute__ ((nonnull (1), nothrow, warn_unused_result)) ;
 
-void free_buffer (buffer_t *restrict buffer)
+void free_buffer (buffer_t const *restrict buffer)
 __attribute__ ((leaf, nonnull (1), nothrow)) ;
 
 #ifdef __cplusplus
