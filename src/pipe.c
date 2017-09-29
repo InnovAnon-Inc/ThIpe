@@ -22,7 +22,7 @@ int init_pipe (
    p->nbuf  = nbuf;
    p->bufs  = bufs;
 
-   TODO (we probably don't need synchronization here)
+   TODO (we probably do not need synchronization here)
    for (i = 0; i != nbuf; i++)
       error_check (tscpaq_enqueue (
       &(p->q_in),
