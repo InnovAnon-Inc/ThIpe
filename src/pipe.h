@@ -24,7 +24,7 @@ typedef struct {
 int init_pipe (
 	pipe_t *restrict p,
 	size_t bufsz, size_t nbuf,
-	buffer_t const bufs[])
+	buffer_t bufs[])
 __attribute__ ((leaf, nonnull (1, 4), nothrow, warn_unused_result)) ;
 
 int alloc_pipe (

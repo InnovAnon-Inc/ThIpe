@@ -16,7 +16,7 @@ __attribute__ ((leaf, nonnull (1, 4), nothrow, warn_unused_result))
 int init_pipe (
    pipe_t *restrict p,
    size_t bufsz, size_t nbuf,
-   buffer_t const bufs[]) {
+   buffer_t bufs[]) {
    size_t i;
    p->bufsz = bufsz;
    p->nbuf  = nbuf;
