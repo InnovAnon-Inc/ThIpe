@@ -32,7 +32,7 @@ int alloc_pipe (
 	size_t bufsz, size_t nbuf)
 __attribute__ ((nonnull (1), nothrow, warn_unused_result)) ;
 
-int free_pipe (pipe_t const *restrict p)
+int free_pipe (pipe_t *restrict p)
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
 
 int read_pipe (pipe_t *restrict p, fd_t fd)

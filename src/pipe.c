@@ -78,7 +78,7 @@ int alloc_pipe (
 }
 
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
-int free_pipe (pipe_t const *restrict p) {
+int free_pipe (pipe_t *restrict p) {
    size_t i;
    error_check (tscpaq_free_queue (&(p->q_in)) != 0) return -1;
    error_check (tscpaq_free_queue (&(p->q_out)) != 0) return -2;
