@@ -37,7 +37,7 @@ int alloc_pipe (
    pipe_t *restrict p,
    size_t bufsz, size_t nbuf) {
    size_t i;
-   buffer_t const *restrict bufs;
+   buffer_t *restrict bufs;
 
    bufs = malloc (nbuf * sizeof (buffer_t));
    error_check (bufs == NULL) return -1;
