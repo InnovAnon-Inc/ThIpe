@@ -1,3 +1,14 @@
+AM_CPPFLAGS = -D__STDC_INT64__
+
+SUBDIRS = ../glitter
+AM_CPPFLAGS += -I ../glitter/src
+
+SUBDIRS += ../restart
+AM_CPPFLAGS += -I ../restart/src
+
+SUBDIRS += ../TSCPAQ
+AM_CPPFLAGS += -I ../TSCPAQ/src
+
 lib_LTLIBRARIES =
 include_HEADERS =
 bin_PROGRAMS    =
@@ -35,14 +46,3 @@ libthipe_la_LIBADD = $(LIBTHIPE_LIBADD)
 
 bin_PROGRAMS = thrio-test
 thrio_test_LDADD = libthipe.la $(LIBTHIPE_LIBADD)
-
-AM_CPPFLAGS = -D__STDC_INT64__
-
-SUBDIRS = ../glitter
-AM_CPPFLAGS += -I ../glitter/src
-
-SUBDIRS += ../restart
-AM_CPPFLAGS += -I ../restart/src
-
-SUBDIRS += ../TSCPAQ
-AM_CPPFLAGS += -I ../TSCPAQ/src
