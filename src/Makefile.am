@@ -44,5 +44,5 @@ lib_LTLIBRARIES += libthipe.la
 libthipe_la_SOURCES =
 libthipe_la_LIBADD = $(LIBTHIPE_LIBADD)
 
-bin_PROGRAMS += thrio-test
-thrio_test_LDADD = libthipe.la $(LIBTHIPE_LIBADD)
+#bin_PROGRAMS += thipe-test
+#thipe_test_LDADD = libthipe.la $(LIBTHIPE_LIBADD)
