@@ -116,7 +116,7 @@ int read_pipe (pipe_t *restrict p, fd_t fd) {
 
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
 int write_pipe (pipe_t *restrict p, fd_t fd) {
-   buffer_t const *restrict buf;
+   buffer_t *restrict buf;
    ssize_t n;
 
    error_check (tscpaq_dequeue (
