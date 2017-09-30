@@ -1,13 +1,21 @@
+include $(top_srcdir)/restart/src/Makefile-LIBADD.inc
+include $(top_srcdir)/TSCPAQ/src/Makefile-LIBADD.inc
+
 LIBBUFFER_LIBADD =
 
-include $(top_srcdir)/restart/src/Makefile-LIBADD.inc
+if USE_SUBMODULES
 LIBPIPE_LIBADD  = ../restart/src/.libs/librestart.la $(LIBRESTART_LIBADD)
-include $(top_srcdir)/TSCPAQ/src/Makefile-LIBADD.inc
 LIBPIPE_LIBADD += ../TSCPAQ/src/.libs/libtscpaq.la $(LIBTSCPAQ_LIBADD)
-LIBPIPE_LIBADD += libbuffer.la $(LIBBUFFER_LIBADD)
 
 LIBIO_LIBADD =
 #LIBIO_LIBADD += ../TSCPAQ/src/.libs/libtscpaq.la $(LIBTSCPAQ_LIBADD)
+else
+LIBPIPE_LIBADD  = -lrestart $(LIBRESTART_LIBADD)
+LIBPIPE_LIBADD += -ltscpaq $(LIBTSCPAQ_LIBADD)
+endif
+
+LIBPIPE_LIBADD += libbuffer.la $(LIBBUFFER_LIBADD)
+
 LIBIO_LIBADD += libbuffer.la $(LIBBUFFER_LIBADD)
 LIBIO_LIBADD += libpipe.la $(LIBPIPE_LIBADD)
 
