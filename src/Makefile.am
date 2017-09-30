@@ -1,13 +1,48 @@
-lib_LTLIBRARIES = libthipe.la
-libthipe_la_SOURCES = buffer.c pipe.c io.c
-include_HEADERS = buffer.h pipe.h io.h
-libthipe_la_LIBADD = -lrestart -ltscpaq -lcpaq
+lib_LTLIBRARIES =
+include_HEADERS =
+bin_PROGRAMS    =
 
-#bin_PROGRAMS = thrio
-#thrio_SOURCES = main.c
-#thrio_LDADD = libthipe.la libthrio.la -lrestart -ltscpaq -lcpaq -lpthread
+LIBBUFFER_LIBADD =
+
+lib_LTLIBRARIES += libbuffer.la
+include_HEADERS += buffer.h
+libbuffer_la_LIBADD = $(LIBBUFFER_LIBADD)
+
+LIBPIPE_LIBADD  = ../restart/src/.libs/librestart.la $(LIBRESTART_LIBADD)
+LIBPIPE_LIBADD += ../TSCPAQ/src/.libs/libtscpaq.la $(LIBTSCPAQ_LIBADD)
+LIBPIPE_LIBADD += libbuffer.la $(LIBBUFFER_LIBADD)
+
+lib_LTLIBRARIES += libpipe.la
+include_HEADERS += pipe.h
+libpipe_la_LIBADD = $(LIBPIPE_LIBADD)
+
+LIBIO_LIBADD =
+LIBIO_LIBADD += ../TSCPAQ/src/.libs/libtscpaq.la $(LIBTSCPAQ_LIBADD)
+LIBIO_LIBADD += libbuffer.la $(LIBBUFFER_LIBADD)
+LIBIO_LIBADD += libpipe.la $(LIBPIPE_LIBADD)
+
+lib_LTLIBRARIES += libio.la
+include_HEADERS += io.h
+libio_la_LIBADD = $(LIBIO_LIBADD)
+
+LIBTHIPE_LIBADD  = libio.la $(LIBIO_LIBADD)
+#LIBTHIPE_LIBADD += libpipe.la $(LIBPIPE_LIBADD)
+#LIBTHIPE_LIBADD += libbuffer.la $(LIBBUFFER_LIBADD)
+
+lib_LTLIBRARIES = libthipe.la
+libthipe_la_SOURCES =
+libthipe_la_LIBADD = $(LIBTHIPE_LIBADD)
+
+bin_PROGRAMS = thrio-test
+thrio_test_LDADD = libthipe.la $(LIBTHIPE_LIBADD)
 
 AM_CPPFLAGS = -D__STDC_INT64__
-AM_CPPFLAGS += -I $(srcdir)/../glitter/src
-AM_CPPFLAGS += -I $(srcdir)/../restart/src
-AM_CPPFLAGS += -I $(srcdir)/../TSCPAQ/src
+
+SUBDIRS = ../glitter
+AM_CPPFLAGS += -I ../glitter/src
+
+SUBDIRS += ../restart
+AM_CPPFLAGS += -I ../restart/src
+
+SUBDIRS += ../TSCPAQ
+AM_CPPFLAGS += -I ../TSCPAQ/src
