@@ -40,9 +40,9 @@ LIBTHIPE_LIBADD  = libio.la $(LIBIO_LIBADD)
 #LIBTHIPE_LIBADD += libpipe.la $(LIBPIPE_LIBADD)
 #LIBTHIPE_LIBADD += libbuffer.la $(LIBBUFFER_LIBADD)
 
-lib_LTLIBRARIES = libthipe.la
+lib_LTLIBRARIES += libthipe.la
 libthipe_la_SOURCES =
 libthipe_la_LIBADD = $(LIBTHIPE_LIBADD)
 
-bin_PROGRAMS = thrio-test
+bin_PROGRAMS += thrio-test
 thrio_test_LDADD = libthipe.la $(LIBTHIPE_LIBADD)
