@@ -103,6 +103,7 @@ int read_pipe (pipe_t *restrict p, fd_t fd) {
 
    error_check (n < 0) return -2;
 
+   TODO (this belongs in client code)
    buf->buf[(size_t) n] = '\0';
    buf->n = (size_t) n + 1;
 
