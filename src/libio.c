@@ -119,8 +119,10 @@ int worker_io (
          TODO (kill other thread);
          return -5;
       }
-
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wdiscarded-qualifiers"
       error_check (tscpaq_enqueue (&(in->q_in),   buf_in)  != 0) {
+	#pragma GCC diagnostic pop
          TODO (kill other thread);
          return -6;
       }
