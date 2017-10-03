@@ -13,3 +13,6 @@
 [submodule "CPAQ"]
 	path = CPAQ
 	url = https://github.com/InnovAnon-Inc/CPAQ.git
+[submodule "MultiMalloc"]
+	path = MultiMalloc
+	url = https://github.com/InnovAnon-Inc/MultiMalloc.git
