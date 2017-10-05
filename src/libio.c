@@ -91,12 +91,18 @@ int worker_io (
       buffer_t const *restrict buf_in;
       buffer_t *restrict buf_out;
 
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wstrict-aliasing"
       error_check (tscpaq_dequeue (&(in->q_out), (void const *restrict *restrict) &buf_in)   != 0) {
+	#pragma GCC diagnostic pop
          TODO (kill other thread);
          return -1;
       }
 
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wstrict-aliasing"
       error_check (tscpaq_dequeue (&(out->q_in), (void const *restrict *restrict) &buf_out)  != 0) {
+	#pragma GCC diagnostic pop
          TODO (kill other thread);
          return -2;
       }
