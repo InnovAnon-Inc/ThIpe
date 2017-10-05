@@ -95,8 +95,11 @@ int read_pipe (pipe_t *restrict p, fd_t fd) {
    buffer_t *restrict buf;
    ssize_t n;
 
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wstrict-aliasing"
    error_check (tscpaq_dequeue (
       &(p->q_in), (void const *restrict *restrict) &buf) != 0)
+	#pragma GCC diagnostic pop
       return -1;
 
    n = r_read (fd, buf->buf, p->bufsz - 1);
@@ -120,8 +123,11 @@ int write_pipe (pipe_t *restrict p, fd_t fd) {
    buffer_t *restrict buf;
    ssize_t n;
 
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wstrict-aliasing"
    error_check (tscpaq_dequeue (
       &(p->q_out), (void const *restrict *restrict) &buf) != 0)
+	#pragma GCC diagnostic pop
       return -1;
 
    n = r_write (fd, buf->buf, buf->n);
