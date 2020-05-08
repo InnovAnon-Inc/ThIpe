@@ -1,15 +1,15 @@
 AM_CPPFLAGS = -D__STDC_INT64__
 
-if USE_SUBMODULES
-SUBDIRS = ../glitter
-AM_CPPFLAGS += -I $(top_srcdir)/glitter/src
-
-SUBDIRS += ../restart
-AM_CPPFLAGS += -I $(top_srcdir)/restart/src
-
-SUBDIRS += ../TSCPAQ
-AM_CPPFLAGS += -I $(top_srcdir)/TSCPAQ/src
-endif
+#if USE_SUBMODULES
+#SUBDIRS = ../glitter
+#AM_CPPFLAGS += -I $(top_srcdir)/glitter/src
+#
+#SUBDIRS += ../restart
+#AM_CPPFLAGS += -I $(top_srcdir)/restart/src
+#
+#SUBDIRS += ../TSCPAQ
+#AM_CPPFLAGS += -I $(top_srcdir)/TSCPAQ/src
+#endif
 
 lib_LTLIBRARIES =
 include_HEADERS =
