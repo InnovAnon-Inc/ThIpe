@@ -1,5 +1,5 @@
-include $(top_srcdir)/restart/src/Makefile-LIBADD.inc
-include $(top_srcdir)/TSCPAQ/src/Makefile-LIBADD.inc
+#include $(top_srcdir)/restart/src/Makefile-LIBADD.inc
+#include $(top_srcdir)/TSCPAQ/src/Makefile-LIBADD.inc
 
 LIBBUFFER_LIBADD =
 LIBIO_LIBADD     =
