@@ -2,6 +2,6 @@
 set -eu
 [ $# -eq 1 ]
 [ $1 == --libs ]
-libpipe_config --libs
-#echo -lpipe `libpipe_config --libs`
+#libpipe_config --libs
+echo -lpipe `libpipe_config --libs`
 

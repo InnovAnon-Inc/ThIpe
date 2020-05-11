@@ -2,6 +2,6 @@
 set -eu
 [ $# -eq 1 ]
 [ $1 == --libs ]
-echo `libbuffer_config --libs` -lrestart `librestart_config --libs` -ltscpaq `libtscpaq_config --libs`
-#echo -lbuffer `libbuffer_config --libs` -lrestart `librestart_config --libs` -ltscpaq `libtscpaq_config --libs`
+#echo `libbuffer_config --libs` -lrestart `librestart_config --libs` -ltscpaq `libtscpaq_config --libs`
+echo -lbuffer `libbuffer_config --libs` -lrestart `librestart_config --libs` -ltscpaq `libtscpaq_config --libs`
 

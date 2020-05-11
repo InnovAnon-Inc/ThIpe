@@ -2,6 +2,6 @@
 set -eu
 [ $# -eq 1 ]
 [ $1 == --libs ]
-libio_config --libs
-#echo -lio `libio_config --libs`
+#libio_config --libs
+echo -lio `libio_config --libs`
 
