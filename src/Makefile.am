@@ -15,8 +15,9 @@ lib_LTLIBRARIES =
 include_HEADERS =
 bin_PROGRAMS    =
 
-include Makefile-LIBADD.inc
+#include Makefile-LIBADD.inc
 #LIBBUFFER_LIBADD =
+dist_bin_SCRIPTS = libbuffer_config libpipe_config libio_config libthipe_config
 
 lib_LTLIBRARIES += libbuffer.la
 include_HEADERS += buffer.h
