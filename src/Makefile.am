@@ -21,7 +21,7 @@ dist_bin_SCRIPTS = libbuffer_config libpipe_config libio_config libthipe_config
 
 lib_LTLIBRARIES += libbuffer.la
 include_HEADERS += buffer.h
-libbuffer_la_LIBADD = $(LIBBUFFER_LIBADD)
+libbuffer_la_LIBADD = @LIBBUFFER_LIBADD@
 
 #LIBPIPE_LIBADD  = ../restart/src/.libs/librestart.la $(LIBRESTART_LIBADD)
 #LIBPIPE_LIBADD += ../TSCPAQ/src/.libs/libtscpaq.la $(LIBTSCPAQ_LIBADD)
@@ -29,7 +29,8 @@ libbuffer_la_LIBADD = $(LIBBUFFER_LIBADD)
 
 lib_LTLIBRARIES += libpipe.la
 include_HEADERS += pipe.h
-libpipe_la_LIBADD = $(LIBPIPE_LIBADD)
+libpipe_la_LIBADD = @LIBPIPE_LIBADD@
+EXTRA_libpipe_la_DEPENDENCIES = libbuffer.la
 
 #LIBIO_LIBADD =
 #LIBIO_LIBADD += ../TSCPAQ/src/.libs/libtscpaq.la $(LIBTSCPAQ_LIBADD)
@@ -38,7 +39,8 @@ libpipe_la_LIBADD = $(LIBPIPE_LIBADD)
 
 lib_LTLIBRARIES += libio.la
 include_HEADERS += io.h
-libio_la_LIBADD = $(LIBIO_LIBADD)
+libio_la_LIBADD = @LIBIO_LIBADD@
+EXTRA_libio_la_DEPENDENCIES = libpipe.la
 
 #LIBTHIPE_LIBADD  = libio.la $(LIBIO_LIBADD)
 ##LIBTHIPE_LIBADD += libpipe.la $(LIBPIPE_LIBADD)
@@ -46,7 +48,8 @@ libio_la_LIBADD = $(LIBIO_LIBADD)
 
 lib_LTLIBRARIES += libthipe.la
 libthipe_la_SOURCES =
-libthipe_la_LIBADD = $(LIBTHIPE_LIBADD)
+libthipe_la_LIBADD = @LIBTHIPE_LIBADD@
+EXTRA_libthipe_la_DEPENDENCIES = libio.la
 
 #bin_PROGRAMS += thipe-test
 #thipe_test_LDADD = libthipe.la $(LIBTHIPE_LIBADD)
