@@ -8,6 +8,10 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
  Makefile
  src/Makefile
+ src/libbuffer.pc
+ src/libio.pc
+ src/libpipe.pc
+ src/libthipe.pc
 ])
 
 AC_ARG_ENABLE([use-submodules],
@@ -15,38 +19,22 @@ AC_ARG_ENABLE([use-submodules],
 AM_CONDITIONAL([USE_SUBMODULES], [test x"$enable_use_submodules" = "xyes"])
 
 AC_CONFIG_MACRO_DIR([m4])
-#AC_CONFIG_SUBDIRS([glitter restart TSCPAQ])
 
 AC_CHECK_HEADERS([stdlib.h])
-AC_CHECK_HEADERS([glitter.h restart.h tscpaq.h])
+#AC_CHECK_HEADERS([glitter.h restart.h tscpaq.h])
 AC_CHECK_HEADERS([pthread.h])
 
 AC_CHECK_LIB([stdlib],[malloc,free])
-AC_CHECK_LIB([restart],[r_read,r_write])
-AC_CHECK_LIB([tscpaq],[tscpaq_alloc_queue,tscpaq_free_queue])
-AC_CHECK_LIB([tscpaq],[tscpaq_enqueue,tscpaq_dequeue])
+#AC_CHECK_LIB([restart],[r_read,r_write])
+#AC_CHECK_LIB([tscpaq],[tscpaq_alloc_queue,tscpaq_free_queue])
+#AC_CHECK_LIB([tscpaq],[tscpaq_enqueue,tscpaq_dequeue])
 AC_CHECK_LIB([pthread],[pthread_create,pthread_join])
 
-#srcdir = @srcdir@
-#LIBBUFFER_LIBADD="`PATH=$(srcdir)src:$PATH libbuffer_config --libs`"
-LIBBUFFER_LIBADD="`PATH=src:$PATH libbuffer_config --libs`"
-AC_SUBST(LIBBUFFER_LIBADD)
-
-#LIBPIPE_LIBADD="libbuffer.la `PATH=src:$PATH libpipe_config --libs`"
-#LIBPIPE_LIBADD="`PATH=$(srcdir)src:$PATH libpipe_config --libs`"
-LIBPIPE_LIBADD="`PATH=src:$PATH libpipe_config --libs`"
-AC_SUBST(LIBPIPE_LIBADD)
-
-#LIBIO_LIBADD="libpipe.la `PATH=src:$PATH libio_config --libs`"
-#LIBIO_LIBADD="`PATH=$(srcdir)src:$PATH libio_config --libs`"
-LIBIO_LIBADD="`PATH=src:$PATH libio_config --libs`"
-AC_SUBST(LIBIO_LIBADD)
-
-#LIBTHIPE_LIBADD="libio.la `PATH=src:$PATH libthipe_config --libs`"
-#LIBTHIPE_LIBADD="`PATH=$(srcdir)src:$PATH libthipe_config --libs`"
-LIBTHIPE_LIBADD="`PATH=src:$PATH libthipe_config --libs`"
-AC_SUBST(LIBTHIPE_LIBADD)
+PKG_CHECK_MODULES([GLITTER],[glitter],,)
+PKG_CHECK_MODULES([TSCPAQ],[libtscpaq],,)
+PKG_CHECK_MODULES([RESTART],[librestart],,)
 
 INNOVANON_WARNINGS([])
 
 AC_OUTPUT
+

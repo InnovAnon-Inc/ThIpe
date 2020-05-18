@@ -1,0 +1,15 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+#io_utility=io-test
+
+Name: @PACKAGE_NAME@-io
+Description: io library
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -lio -lpipe -lbuffer
+Cflags: -I${includedir}
+Requires: glitter libtscpaq
+Requires.private: librestart
+

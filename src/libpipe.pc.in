@@ -1,0 +1,15 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+#pipe_utility=pipe-test
+
+Name: @PACKAGE_NAME@-pipe
+Description: pipe library
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -lpipe -lbuffer
+Cflags: -I${includedir}
+Requires: glitter libtscpaq
+Requires.private: librestart
+

@@ -1,55 +1,32 @@
 AM_CPPFLAGS = -D__STDC_INT64__
 
-#if USE_SUBMODULES
-#SUBDIRS = ../glitter
-#AM_CPPFLAGS += -I $(top_srcdir)/glitter/src
-#
-#SUBDIRS += ../restart
-#AM_CPPFLAGS += -I $(top_srcdir)/restart/src
-#
-#SUBDIRS += ../TSCPAQ
-#AM_CPPFLAGS += -I $(top_srcdir)/TSCPAQ/src
-#endif
-
 lib_LTLIBRARIES =
 include_HEADERS =
 bin_PROGRAMS    =
 
-#include Makefile-LIBADD.inc
-#LIBBUFFER_LIBADD =
-dist_bin_SCRIPTS = libbuffer_config libpipe_config libio_config libthipe_config
-
 lib_LTLIBRARIES += libbuffer.la
 include_HEADERS += buffer.h
-libbuffer_la_LIBADD = @LIBBUFFER_LIBADD@
-
-#LIBPIPE_LIBADD  = ../restart/src/.libs/librestart.la $(LIBRESTART_LIBADD)
-#LIBPIPE_LIBADD += ../TSCPAQ/src/.libs/libtscpaq.la $(LIBTSCPAQ_LIBADD)
-#LIBPIPE_LIBADD += libbuffer.la $(LIBBUFFER_LIBADD)
+libbuffer_la_CPPFLAGS = $(GLITTER_CFLAGS)
+libbuffer_la_LIBADD   = $(GLITTER_LIBS)
 
 lib_LTLIBRARIES += libpipe.la
 include_HEADERS += pipe.h
-libpipe_la_LIBADD = @LIBPIPE_LIBADD@
+libpipe_la_CPPFLAGS =          $(GLITTER_CFLAGS) $(TSCPAQ_CFLAGS) $(RESTART_CFLAGS)
+libpipe_la_LIBADD   = -lbuffer $(GLITTER_LIB)    $(TSCPAQ_LIBS)   $(RESTART_LIBS)
 EXTRA_libpipe_la_DEPENDENCIES = libbuffer.la
-
-#LIBIO_LIBADD =
-#LIBIO_LIBADD += ../TSCPAQ/src/.libs/libtscpaq.la $(LIBTSCPAQ_LIBADD)
-#LIBIO_LIBADD += libbuffer.la $(LIBBUFFER_LIBADD)
-#LIBIO_LIBADD += libpipe.la $(LIBPIPE_LIBADD)
 
 lib_LTLIBRARIES += libio.la
 include_HEADERS += io.h
-libio_la_LIBADD = @LIBIO_LIBADD@
+libio_la_CPPFLAGS =                 $(GLITTER_CFLAGS) $(TSCPAQ_CFLAGS) $(RESTART_CFLAGS)
+libio_la_LIBADD   = -lpipe -lbuffer $(GLITTER_LIBS)   $(TSCPAQ_LIBS)   $(RESTART_LIBS)
 EXTRA_libio_la_DEPENDENCIES = libpipe.la
-
-#LIBTHIPE_LIBADD  = libio.la $(LIBIO_LIBADD)
-##LIBTHIPE_LIBADD += libpipe.la $(LIBPIPE_LIBADD)
-##LIBTHIPE_LIBADD += libbuffer.la $(LIBBUFFER_LIBADD)
 
 lib_LTLIBRARIES += libthipe.la
 libthipe_la_SOURCES =
-libthipe_la_LIBADD = @LIBTHIPE_LIBADD@
+libthipe_la_CPPFLAGS =                      $(GLITTER_CFLAGS) $(TSCPAQ_CFLAGS) $(RESTART_CFLAGS)
+libthipe_la_LIBADD   = -lio -lpipe -lbuffer $(GLITTER_LIBS)   $(TSCPAQ_LIBS)   $(RESTART_LIBS)
 EXTRA_libthipe_la_DEPENDENCIES = libio.la
 
-#bin_PROGRAMS += thipe-test
+#Bin_PROGRAMS += thipe-test
 #thipe_test_LDADD = libthipe.la $(LIBTHIPE_LIBADD)
+
